@@ -84,18 +84,43 @@ battlecruiser = FlyableAttackUnit("배틀 크루저", 500,25,3)
 vulture.move("11시")
 battlecruiser.move("9시")
 
+# class BuildingUnit(Unit):
+#     def __init__(self, name, hp, location):
+#         pass
+
+# supply_depot = BuildingUnit("서플라이 디폿",500,"7시")
+
+# def game_start():
+#     print("알림 새로운 게임을 시작합니다.")
+
+# def game_over():
+#     pass
+
+
+# game_start()
+# game_over()
 class BuildingUnit(Unit):
     def __init__(self, name, hp, location):
-        pass
+        super().__init__(name,hp,0)
+        self.location=location
 
-supply_depot = BuildingUnit("서플라이 디폿",500,"7시")
+class Tank(AttackUnit):
+    seize_developed = False
 
-def game_start():
-    print("알림 새로운 게임을 시작합니다.")
+    def __init__(self):
+        AttackUnit.__init__(self,"탱크", 150, 1, 35)
+        self.seize_mode = False
 
-def game_over():
-    pass
+    def set_seize_mode(self):
+        if Tank.seize_developed == False:
+            return
+        
+        if self.seize_mode ==False:
+            print("{0}: 시즈모드로 전환합니다.".format(self.name))
+            self.damage*=2
+            self.seize_mode=True
 
-
-game_start()
-game_over()
+        else:
+            print("{0}: 시즈모드로 해제합니다.".format(self.name))
+            self.damage/=2
+            self.seize_mode=False
