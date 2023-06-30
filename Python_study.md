@@ -752,3 +752,90 @@ battlecruiser.move("9시")
 
 ![Alt text](images/%EA%B7%B8%EB%A6%BC%EC%BA%A1%EC%B3%904.png)
 
+## pass
+일단 그냥 넘어 가는것
+```python
+class BuildingUnit(Unit):
+    def __init__(self, name, hp, location):
+        pass
+
+supply_depot = BuildingUnit("서플라이 디폿",500,"7시")
+
+def game_start():
+    print("알림 새로운 게임을 시작합니다.")
+
+def game_over():
+    pass
+
+
+game_start()
+game_over()
+
+```
+
+## super
+
+상속 2가지 버전
+
+원래
+```python
+class BuildingUnit(Unit):
+    def __init__(self, name, hp, location):
+        Unit.__init__(self,name,hp,0)
+        self.location=location
+```
+super
+
+차이점 : ()를 붙혀야하고 self를 안써도됨
+```python
+class BuildingUnit(Unit):
+    def __init__(self, name, hp, location):
+        super().__init__(name,hp,0)
+        self.location=location
+```
+class FlyableUnit(Flyable, Unit):
+ def __init__(self):
+  super().__init__()
+위처럼 다중 상속 코드를 작성했을 때, super() 를 쓰면 순서상 맨 "마지막" 이 아닌, 맨 "처음" 클래스(예제에서는 Flyable) 에 대해서 _init_ 함수가 호출 됩니다.
+
+다중상속을 할때에는 super를 권장하지 않음
+
+
+## 상속추가
+```python
+class Tank(AttackUnit):
+    seize_developed = False
+
+    def __init__(self):
+        AttackUnit.__init__(self,"탱크", 150, 1, 35)
+        self.seize_mode = False
+
+    def set_seize_mode(self):
+        if Tank.seize_developed == False:
+            return
+        
+        if self.seize_mode ==False:
+            print("{0}: 시즈모드로 전환합니다.".format(self.name))
+            self.damage*=2
+            self.seize_mode=True
+
+        else:
+            print("{0}: 시즈모드로 해제합니다.".format(self.name))
+            self.damage/=2
+            self.seize_mode=False
+
+```
+이 객체가 특정클래스의 인스턴스인지 확인하는 함수
+isinstance(,)
+```python 
+for unit in attack_units:
+    if isinstance(unit,Marine):
+        unit.stimpack()
+    elif isinstance(unit,Tank):
+        unit.set_seize_mode()
+    elif isinstance(unit, Wraith):
+        unit.clocking()
+```
+
+![Alt text](images/%EA%B7%B8%EB%A6%BC%EC%BA%A1%EC%B3%905.png)
+
