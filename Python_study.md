@@ -536,6 +536,11 @@ def profile2(name, age, main_lang):
 profile(name="유재석",age=17,main_lang="파이썬")
 profile(age=17,name="유재석",main_lang="파이썬")
 ```
+
+emil.endswith("dfdf") -> 이 함수는 뒷 끝나는 문자열이 dfdf나 들어있나 확인하고 리턴값을 bool 형식으로 반환한다
+
+email.removesuffix("ㅇㄹㅇ")이것은 email의 문자열 안에서 ㅇㄹㅇ를 삭제한 문자열 값을 반환한다
+
 ### 가변인자
  - 서로다른 인수의 값을 넣어줄때 가변인자를 사용함
 ```python
