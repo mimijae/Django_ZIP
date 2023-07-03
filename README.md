@@ -91,3 +91,18 @@ __init__.py가 있다는것은 파이썬 패키지다 라고 약속되어있는 
 
 ## urls.py
 urls.py 파일 안에 url이 정이가 되어야 view가 그 코드를 받아 실행할수있다
+
+## models.py, migrations
+데이터를 정의하고 정의한 데이터를 기반으로 데이터베이스를 만들때 기록을 남기는것을 migrations폴더
+
+## admin.py
+관리자 인터페이스를 제공해주는 파일
+
+## views.py
+컨트롤러 역할을하는 비즈니스로직이다.
+
+# ※앱을 만들면 무조건 앱을 추가해주어야한다
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%906.png)
+
+settings.py 파일에 있는 
+저부분에 앱을 무조건 추가시키고 ,(콤마) 까지 붙혀야한다
