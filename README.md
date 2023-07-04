@@ -60,6 +60,7 @@
   - SSL/HTTPS
 
 ## 장고의 기본 구조
+MTV 디자인 패턴
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%903.png)
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%904.png)
@@ -117,7 +118,7 @@ settings.py 파일에 있는
 
 # 데이터베이스와 ORM 완벽 이해하기
 
-## 1.데이터베이스와 ORM 이해하기
+## 1. 데이터베이스와 ORM 이해하기
 ### 데이터베이스
  - 공유의 목적으로 통합관리되는 자료의 집합
  - 논리적으로 연관된 하나 이상의 자료의 모음으로 내용을 구조화하여 검색과 갱신의 효율화한것
@@ -139,4 +140,54 @@ settings.py 파일에 있는
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9012.png)
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9013.png)
+
+ORM -> 객체와 관계를 매핑시켜주는것
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9015.png)
+
+ORM 장점단점
+- 장점
+- 생산성 향상, 비즈니스 로직 집중
+- 재사용 및 유지보수 용이
+- DBMS 종속되지 않음
+
+- 단점
+- 프로젝트가 복잡한 경우 난이도 상승
+- Raw Query보다 성능이 낮음
+  
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9016.png)
+  Model,Field가 데이터베이스의 구조 테이블의 구조를 잡는 역할을 한다
+
+## 2. Django Models 이해하기
+
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9017.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9018.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9019.png)
+
+
+## 3. 인스타그램 게시글로 이해하는 Models
+
+**모델링**
+- 저장하고자하는 데이터를 모델로 정의하는것
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9020.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9021.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9022.png)
+
+## 4. 인스타그램 댓글로 이해하는 Models 관계 구성
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9023.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9024.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9025.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9026.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9027.png)
 
