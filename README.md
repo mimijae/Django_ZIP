@@ -106,3 +106,37 @@ urls.py 파일 안에 url이 정이가 되어야 view가 그 코드를 받아 �
 
 settings.py 파일에 있는 
 저부분에 앱을 무조건 추가시키고 ,(콤마) 까지 붙혀야한다
+
+## http의 개념 
+
+ - http는 컴퓨터가 서로 데이터를 주고받는 방법
+ - http요청을 하면 브라우저는 서버로 응답을 하고 서버는 응답을 브라우저에게 함
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%907.png)
+
+
+
+# 데이터베이스와 ORM 완벽 이해하기
+
+## 1.데이터베이스와 ORM 이해하기
+### 데이터베이스
+ - 공유의 목적으로 통합관리되는 자료의 집합
+ - 논리적으로 연관된 하나 이상의 자료의 모음으로 내용을 구조화하여 검색과 갱신의 효율화한것
+ - " 중복을 없애고 자료를 구조화하여 기억시켜 놓는 자료의 집합체 "
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%908.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%909.png)
+
+### 데이터베이스 관리 리스템
+- 데이터베이스 내의 데이터를 접근 할 수 있도록 해주는 소프트웨어
+- 사용자 또는 다른 프로그램의 요구를 처리하고 응답하여 데이터를 사용 할 수 있도록 함
+- 일반적으로 DB라고 부름
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9010.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9011.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9012.png)
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9013.png)
+
