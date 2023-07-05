@@ -16,6 +16,6 @@ class Post(models.Model):
 
 class Comment(models.Model):
     content = models.TextField(verbose_name='내용')
-    created_at = models.DateTimeField(verbose_name='작성일')
+    created_at = models.DateTimeField(verbose_name='작성일',auto_now_add=True)
     post = models.ForeignKey(to='Post', on_delete=models.CASCADE,null=True,blank=True)# on_delete=models.CASCADE는 Post가 삭제되었을대 Comment도 자동으로 삭제해준다는 의미
     writer = models.ForeignKey(to=User, on_delete=models.CASCADE)

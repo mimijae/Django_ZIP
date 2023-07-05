@@ -141,6 +141,12 @@ settings.py 파일에 있는
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9013.png)
 
+### DataBase Tool
+- 데이터베이스에 관리를 위한 도구
+- 툴을 활용하여 테이블이나 데이터를 조작
+- GUI제공
+
+
 ORM -> 객체와 관계를 매핑시켜주는것
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9015.png)
 
@@ -190,4 +196,11 @@ ORM 장점단점
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9026.png)
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9027.png)
+
+# QuerySet API와 Admin 개발하기
+Query: DB에 정보를 요청하는것
+QuerySet: DB에서 전달 받은 객체의 목록
+QuerySetAPI: DB에 요쳥하기 위한 인터페이스
+
+![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9028.png)
 

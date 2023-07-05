@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from demos.views import calculator
-
+from demos.views import calculator,lotto_index,lotto_result
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('calculator/',calculator), # 이 url로 들어오면 이 함수를 실행시켜라는 코드
+    path('lotto/',lotto_index,name='lotto_index'),
+    path('lotto/result/',lotto_result,name='lotto_result'),
 ]
+
