@@ -197,10 +197,36 @@ ORM 장점단점
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9027.png)
 
-# QuerySet API와 Admin 개발하기
+## QuerySet API와 Admin 개발하기
 Query: DB에 정보를 요청하는것
 QuerySet: DB에서 전달 받은 객체의 목록
 QuerySetAPI: DB에 요쳥하기 위한 인터페이스
 
 ![Alt text](images/%EC%9E%A5%EA%B3%A0%EC%BA%A1%EC%B3%9028.png)
 
+# Template와 View 정복하기
+
+Views를 만드는 방법
+
+- FBV : Function Basesd Views
+- CBV : Class Based Views
+
+![Alt text](images/Views1.png)
+
+FBV 는 일회성, 특수 목적이 있는 View에 적합
+
+![Alt text](images/Views2.png)
+
+CBV는 일반적인 생성,조회,수정,삭제 등의 View에 적합
+
+FBV와 CBV는 좋고 나쁘고를 판단하기 보다 
+상황에 적합한 방식을 선택하는 것이 바람직하다.
+
+
+![Alt text](images/Template1.png)
+
+![Alt text](images/Template2.png)
+
+![Alt text](images/Template3.png)
+
+![Alt text](images/Template4.png)
