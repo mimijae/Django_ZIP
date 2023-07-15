@@ -293,3 +293,58 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 >
 {% endif %}
 ```
+
+## 왜 태그 관련 내용에 앞서 form_valid()함수를 사용하나?
+
+CreateView 혹은 UpdateView의 form_valid()함수는 폼 안에 들어온 값을 바탕으로 모델에 해당하는 인스턴스를 만들어 데이터 베이스에 저장한 다음 그 인스턴스의 경로로 리다이렉트하는 역할을 한다고 했다. 이때 CreateView의 form_valid()함수를 오버라이딩해서 사용했던 이유는 데이터베이스에 저장하기 전에 폼에 담고 있지 않았던 작성자 정보를 추가하고 태그까지 추가하고 싶었기 때문이다
+
+문제는 포스트에 태그를 추가하기 위해서는 포스트가 이미 데이터베이스에 저장되어 pk를 부여받은 다음이어야 한다는 점이다. Post모델과 Tag모델은 다대다 관계이므로 Post 레코드가 이미 존재해야 하기 때문이다. 그래서 태그와 관련된 작업을 하기전에 CreateView의 form_valid()함수를 사용하고 그 결과를 response라는 변수에 임시로 담아두었다. 새로 저장된 포스트는 self.object라고 가져올 수 있게 장고가 구성하므로 여기에서 tags필드에 원하는 태그를 추가할 수 있다.
+
+## 포스트 수정 페이지에 태그 입력란 추가하기
+
+현재 포스트의 태그가 나열되어있어야 사용자가 수정하지 않고 제출버튼을 눌렀을때 현재 상태가 그대로 유지될 수 있다
+그래서 Tags에 해당 포스트의 기존 태그가 미리(자동)으로 입력되어있어야 한다
+
+그래서 포스트 수정 페이지를 열었을때 기존 태그가 자동으로 입력되도록 만들기 위해선 Tags를 입력하기위해 만든 input요소에 value라는 속성을 추가하면 됩니다. value="{{tags_str_default}}를 추가한다.
+
+CBV로 뷰를 만들때 템플릿으로 추가 인자를 넘기려면 get_context_dat()를 이용한다
+
+만약 이 Post레코드(self.object)에 tags가 존재한다면 이 tags의 name을 리스트 형태로 담는다. 그리고 이 리스트의 값들을 세미콜론(;)으로 결합하여 하나의 문자열로 만든다. 그결고를 context['tags_str_default']에 담아 리턴하면 템플릿에서 해당 위치를 채운다
+
+아래는 관련된 코드이다
+
+```python
+def get_context_data(self, **kwargs):
+    context = super(PostUpdate,self).get_context_data()
+    if self.object.tags.exists():
+        tags_str_list = list()
+        for t in self.object.tags.all():
+            tags_str_list.append(t.name)
+        context['tags_str_default'] = ';'.join(tags_str_list)
+
+    return context
+```
+
+PostCreate 때와 마찬가지로 PostUpdate에도 form_valid()를 추가하고, tags_str로 들어온 값을 처리할 수 있도록 코드를 추가한다
+
+```python
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    def form_valid(self,form):
+        response = super(PostUpdate,self).form_valid(form)
+        self.object.tags.clear()
+
+        tags_str = self.request.POST.get('tags_str')
+        if tags_str:
+            tags_str=tags_str.strip()
+            tags_str = tags_str.replace(',',';')
+            tags_list = tags_str.split(';')
+
+            for t in tags_list:
+                t=t.strip()
+                tag, is_tag_created = Tag.objects.get_or_create(name=t)
+                if is_tag_created:
+                    tag.slug = slugify(t,allow_unicode=True)
+                    tag.save()
+                self.object.tags.add(tag)
+    return response
+```
