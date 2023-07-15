@@ -348,3 +348,141 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
                 self.object.tags.add(tag)
     return response
 ```
+
+# 외부 라이브러리 활용
+
+## ※ django-crispy-forms
+
+설치
+
+```cmd
+pip install django-crispy-forms
+```
+
+새로운 모듈을 설치한 후에는 프로젝트폴더의 settigs.py의 INSTALLED_APPS에 등록을 해야함
+그리고 settings.py 맨 아래에 crispy_forms의 스타일을 bootstrap4로 하겠다고 지정
+
+```python
+INSTALLED_APPS=[
+    'crispy_forms',
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+```
+
+crispy_forms를 적용할 수 있도록 html 맨위에(extends보단 아래) {% load crispy_forms_tags %}를 추가
+
+{{form}} -> {{form | crispy}} 추가
+
+이렇게하면 더이상 폼이 테이블 형태로 나타나지 않는다
+따라서 {{form}}을 감싸고 있던 table 태그는 삭제하고 다음과 같이 수정한다
+input 태그의 class도 수정하여 crispy_forms의 기본양식이 적용될 수 있도록 한다
+
+br/로 줄바꿈도 추가해준다
+
+```html
+{{form|crispy}}
+<div id="div_id_tags_str">
+    <lable for="id_tags_str">Tags:</label>
+    <input type="text" name="tags_str" id="id_tags_str" class="textinput textInput form-control">
+    </div>
+    <br/>
+
+```
+
+## 마크다운 적용
+
+지금까지 만든 웹사이트는 어떤 페이지에서 포스트를 작성하더라도 줄바꿈이 적용되지 않는다는 치명적인 단점이 있다. 글자 크기도 바꿀수 없고, 내용 중간에 그림도 넣을수 없다
+django-markdownx를 설치하면 마크다운 문법을 적용하여 문제를 해결할 수 있다
+
+```cmd
+pip install django-markdown
+```
+
+settings.py
+
+```python
+INSTALLED_APPS = [
+    'markdownx',
+]
+```
+
+urls.py
+
+```python
+urlpatterns=[
+    path('markdownx/', include('markdownx.urls')),
+]
+```
+
+Post모델의 content필드를 TextField가 아닌 MarkdownxField로 바꾼다
+
+content = MarkdownxField()
+
+post_form.html에 {{form.media}} 추가
+
+작성한 내용 마크다운으로 보이도록 할수도 있음
+-> get_content_markdown()메서드 만들어야함'
+
+## 회원가입과 로그인 기능 추가하기
+
+django-allauth 설치
+
+예전에는 구글, 카카오톡, 페이스북 등으로 로그인 하는 기능을 개발하기가 복잡했다
+하짐나 django-allauth 라는 좋은 라이브러리를 이용하면 쉽고 간단하게 개발 할 수 있다
+
+```cmd
+pip install django-allauth
+```
+
+settings.py
+
+```python
+INSTALLED_APPS=[
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google', # 구글 로그인을 사용
+]
+
+```
+
+다음으로 맨아래에 AUTHENTICATTON_BACKENDS 설정과 SITE_ID =1을 추가
+마지막으로 회원가입을 할때 이메일을 반드시 받는 것으로 설정한다. 그 이메일이 맞는지 검증하는 기능은 작동하지 않도록 설정한다.
+
+```python
+AUTHENTICATTON_BACKENDS=(
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.accounts.auth_backends.AuthenticationBackend',
+)
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+```
+
+로그인 했을때 포스트 목록 페이지로 리 다이렉트 하려면
+
+```python
+LOGIN_REDIRECT_URL='/blog/'
+```
+
+이렇게 한줄 추가
+
+urls.py
+
+```python
+urlpatterns=[
+    path('accounts/',include('allauth.urls')),
+]
+```
+
+django-allauth을 사용하려면 데이터베이스에도 반영을 해야한다
+
+```python
+python manage.py migrate
+```
+
+django-allauth는 구글뿐만 아니라 다양한 서비스 계정으로 로그인하는 기능을 제공한다
+※다른 서비스의 인증 방식은 아래의 공식 웹사이트의 메뉴얼을 참고해라
+
+- django-allauth.readthe-docs.io/en/latest/
