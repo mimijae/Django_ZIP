@@ -1,5 +1,41 @@
 # Django_ZIP
 
+가상환경 공간 생성
+```cmd
+python -m venv venv // 가상환경 공간 생성
+```
+
+가상환경에 접속
+```cmd
+.\venv\Scripts\activate // 가상환경에 접속
+```
+
+pip자체를 업그레이드
+```cmd
+pip install --upgrade pip // pip자체를 업그레이드
+```
+
+장고설치 
+```cmd
+pip install django 
+```
+
+장고 프로젝트 생성
+```cmd
+django-admin startproject config .
+```
+
+서버실행
+```cmd
+python manage.py runserver
+```
+
+장고 앱생성
+```cmd
+django-admin startapp 앱이름
+```
+
+가상
 ## 장고 특징
 - Python 웹 프레임워크
 - MTV 디자인 패턴
