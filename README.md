@@ -1,5 +1,6 @@
 # Django_ZIP
 
+## 장고 시작
 가상환경 공간 생성
 ```cmd
 python -m venv venv // 가상환경 공간 생성
@@ -35,7 +36,6 @@ python manage.py runserver
 django-admin startapp 앱이름
 ```
 
-가상
 ## 장고 특징
 - Python 웹 프레임워크
 - MTV 디자인 패턴
